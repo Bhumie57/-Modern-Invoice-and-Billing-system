@@ -1,9 +1,9 @@
-from django.shortcuts import render
-
-from .models import Invoice
+from django.contrib import messages
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
+
 from .forms import InvoiceForm
-from django.shortcuts import redirect
+from .models import Invoice
 
 #create a new record
 def create_invoice(request):
@@ -37,17 +37,20 @@ def mark_as_paid(request):
     return render(request,'cust_name.html',data)
 
 def add_invoice(request):
-    if request.method== 'POST':
-        form=InvoiceForm(request.POST)
+    if request.method == 'POST':
+        form = InvoiceForm(request.POST)
         if form.is_valid():
+            form.save()
+            messages.success(request, 'Invoice created successfully.')
             return redirect('invoice_list')
+        messages.error(request, 'Please correct the errors below.')
     else:
-        form=InvoiceForm()
+        form = InvoiceForm()
 
     data = {
-        'form':form
+        'form': form
     }
-    return render(request,'add_invoice.html',data)
+    return render(request, 'add_invoice.html', data)
 
 
 

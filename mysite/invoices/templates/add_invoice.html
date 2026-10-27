@@ -5,6 +5,9 @@
 <h1> ADD NEW INVOICE </h1>
 <form method="POST">
     {% csrf_token %}
+    {% if form.errors %}
+        <p>Please correct the errors below.</p>
+    {% endif %}
     {{form.as_p}}
     <button type="submit">Save Invoice</button>
 </form>
