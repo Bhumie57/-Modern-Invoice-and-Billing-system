@@ -12,9 +12,9 @@
 
         <div class="customer-card">
 
-            <h3>{{ invoice.customer }}</h3>
+            <h3>{{ invoice.customer_name }}</h3>
 
-            <p>Invoice #{{ invoice.number }}</p>
+            <p>Invoice #{{ invoice.invoice_number }}</p>
 
             <h2>₹{{ invoice.amount }}</h2>
 
@@ -23,6 +23,10 @@
             </span>
 
         </div>
+
+        {% empty %}
+
+        <p>No customers found.</p>
 
         {% endfor %}
 

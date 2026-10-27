@@ -121,7 +121,7 @@
 
                     <p>Total Invoices</p>
 
-                    <h2>0</h2>
+                    <h2>{{ total_invoices }}</h2>
 
                     <span>All invoices</span>
 
@@ -144,7 +144,7 @@
 
                     <p>Total Customers</p>
 
-                    <h2>0</h2>
+                    <h2>{{ total_customers }}</h2>
 
                     <span>Active customers</span>
 
@@ -165,9 +165,9 @@
 
                 <div class="summary-info">
 
-                    <p>Total Revenue</p>
+                    <p>Total Invoiced</p>
 
-                    <h2>₹0</h2>
+                    <h2>₹{{ total_revenue }}</h2>
 
                     <span>Total amount</span>
 
@@ -205,6 +205,18 @@
             </div>
 
 
+            {% if recent_invoices %}
+
+                {% for invoice in recent_invoices %}
+                <div class="unpaid-item">
+                    {{ invoice.invoice_number }} -
+                    {{ invoice.customer_name }} -
+                    ₹{{ invoice.amount }}
+                </div>
+                {% endfor %}
+
+            {% else %}
+
             <div class="empty-state">
 
                 <div class="empty-icon">
@@ -218,6 +230,8 @@
                 </p>
 
             </div>
+
+            {% endif %}
 
         </div>
 

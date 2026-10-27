@@ -13,7 +13,6 @@
                 <th>Invoice #</th>
                 <th>Customer</th>
                 <th>Date</th>
-                <th>Due Date</th>
                 <th>Amount</th>
                 <th>Status</th>
             </tr>
@@ -26,29 +25,25 @@
             <tr>
                 <td>{{ invoice.invoice_number }}</td>
 
-                <td>
-                    <a href="/invoices/{{ invoice.pk }}/">
-                        {{ invoice.customer }}
-                    </a>
-                </td>
+                <td>{{ invoice.customer_name }}</td>
 
-                <td>{{ invoice.date }}</td>
-
-                <td>{{ invoice.due_date }}</td>
+                <td>{{ invoice.date_created }}</td>
 
                 <td>₹{{ invoice.amount }}</td>
 
                 <td>
-                    <span class="badge {{ invoice.status }}">
-                        {{ invoice.get_status_display }}
-                    </span>
+                    {% if invoice.is_paid %}
+                    <span class="badge PAID">Paid</span>
+                    {% else %}
+                    <span class="badge UNPAID">Unpaid</span>
+                    {% endif %}
                 </td>
             </tr>
 
             {% empty %}
 
             <tr>
-                <td colspan="6">
+                <td colspan="5">
                     No invoices found.
                 </td>
             </tr>

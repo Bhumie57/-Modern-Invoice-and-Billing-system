@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Sum
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 
@@ -61,26 +62,31 @@ def add_invoice(request):
 class HomePageView(TemplateView):
     template_name = "home.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        invoices = Invoice.objects.all()
+        total_amount = invoices.aggregate(total=Sum('amount'))['total']
+        context['total_invoices'] = invoices.count()
+        context['total_customers'] = invoices.values('customer_name').distinct().count()
+        context['total_revenue'] = total_amount or 0
+        context['recent_invoices'] = invoices.order_by('-date_created', '-id')[:5]
+        return context
+
 class InvoiceListView(TemplateView):
     template_name="invoice_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context['all_invoices'] = Invoice.objects.all()
-
+        invoices = Invoice.objects.all().order_by('-date_created', '-id')
+        context['all_invoices'] = invoices
+        context['unpaid_invoices'] = invoices.filter(is_paid=False)
         return context
 
 
 def show_invoices(request):
-    data={
-        'all_invoices':[
-            {'number' : 1, 'customer' : 'Shana','amount' : 50000},
-            {'number' : 2, 'customer' : 'Aishwarya','amount' : 50000},
-            {'number' : 1, 'customer' : 'Nandni','amount' : 50000},
-
-        ]
+    data = {
+        'all_invoices': Invoice.objects.all().order_by('customer_name', '-id')
     }
-    return render(request, "cust_name.html",data)
+    return render(request, "cust_name.html", data)
 
 
 
