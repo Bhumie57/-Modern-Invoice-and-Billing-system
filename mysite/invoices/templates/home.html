@@ -1,0 +1,237 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Billing System</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="brand">
+        <div class="brand-icon">₹</div>
+        Billing System
+    </div>
+
+    <div class="nav-links">
+        <a href="{% url 'home' %}" class="active">Home</a>
+        <a href="{% url 'invoice_list' %}">Invoices</a>
+        <a href="{% url 'cust_name' %}">Customers</a>
+    </div>
+
+    <div class="profile">
+        <div class="profile-circle">U</div>
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a href="{% url 'home' %}" class="side-item selected">
+            <span class="side-icon">⌂</span>
+            <span>Home</span>
+        </a>
+
+        <a href="{% url 'invoice_list' %}" class="side-item">
+            <span class="side-icon">▤</span>
+            <span>Invoices</span>
+        </a>
+
+        <a href="{% url 'cust_name' %}" class="side-item">
+            <span class="side-icon">♙</span>
+            <span>Customers</span>
+        </a>
+
+        <div class="sidebar-line"></div>
+
+        <div class="sidebar-bottom">
+
+            <a href="#" class="side-item">
+                <span class="side-icon">⚙</span>
+                <span>Settings</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+
+    <main class="main-content">
+
+        <!-- WELCOME CARD -->
+
+        <div class="welcome-card">
+
+            <div class="welcome-text">
+
+                <h1>
+                    Welcome to the
+                    <span>Billing System</span>
+                </h1>
+
+                <p>
+                    Track invoices and customers from one simple dashboard.
+                </p>
+
+                <div class="welcome-buttons">
+
+                    <a href="{% url 'invoice_list' %}" class="primary-btn">
+                        + &nbsp; View Invoices
+                    </a>
+
+                    <a href="{% url 'cust_name' %}" class="secondary-btn">
+                        ♙ &nbsp; View Customers
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY CARDS -->
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ▤
+                </div>
+
+                <div class="summary-info">
+
+                    <p>Total Invoices</p>
+
+                    <h2>0</h2>
+
+                    <span>All invoices</span>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ♙
+                </div>
+
+                <div class="summary-info">
+
+                    <p>Total Customers</p>
+
+                    <h2>0</h2>
+
+                    <span>Active customers</span>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon">
+                    ₹
+                </div>
+
+                <div class="summary-info">
+
+                    <p>Total Revenue</p>
+
+                    <h2>₹0</h2>
+
+                    <span>Total amount</span>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECENT INVOICES -->
+
+        <div class="recent-card">
+
+            <div class="recent-header">
+
+                <div class="recent-title">
+
+                    <div class="document-icon">
+                        ▤
+                    </div>
+
+                    <h2>Recent Invoices</h2>
+
+                </div>
+
+                <a href="{% url 'invoice_list' %}">
+                    View All
+                </a>
+
+            </div>
+
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ▤
+                </div>
+
+                <h3>No recent invoices</h3>
+
+                <p>
+                    Your recent invoices will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+            © Billing System. All rights reserved.
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

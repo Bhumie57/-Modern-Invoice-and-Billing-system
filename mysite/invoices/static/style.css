@@ -1,0 +1,811 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #173b70;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 78px;
+    background: #123b70;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+
+    background: #2879e8;
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 45px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+    padding: 29px 5px;
+}
+
+.nav-links a.active {
+    border-bottom: 3px solid white;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-circle {
+    width: 38px;
+    height: 38px;
+
+    border: 2px solid #6ca7ff;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.layout {
+    display: flex;
+    min-height: calc(100vh - 78px);
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 130px;
+
+    background: #123b70;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 28px 15px;
+}
+
+.side-item {
+    color: white;
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 14px 5px;
+
+    border-radius: 9px;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+}
+
+.side-item:hover {
+    background: #1e5595;
+}
+
+.side-item.selected {
+    background: #2879e8;
+}
+
+.side-icon {
+    font-size: 25px;
+}
+
+.sidebar-line {
+    height: 1px;
+    background: #315988;
+
+    margin: 25px 5px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-content {
+    flex: 1;
+
+    background: #ffffff;
+
+    padding: 45px 70px 25px;
+}
+
+
+/* =========================
+   WELCOME CARD
+========================= */
+
+.welcome-card {
+    min-height: 350px;
+
+    border: 1px solid #dce8f8;
+    border-radius: 15px;
+
+    background: #f8fbff;
+
+    box-shadow: 0 3px 12px rgba(30, 80, 140, 0.06);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 45px 60px;
+
+    overflow: hidden;
+}
+
+.welcome-text {
+    max-width: 560px;
+}
+
+.welcome-text h1 {
+    font-size: 42px;
+    line-height: 1.25;
+
+    color: #173b70;
+
+    margin-bottom: 22px;
+}
+
+.welcome-text h1 span {
+    color: #2879e8;
+}
+
+.welcome-text p {
+    font-size: 17px;
+
+    color: #5d7598;
+
+    margin-bottom: 30px;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 14px 25px;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.primary-btn {
+    border: none;
+
+    background: #2879e8;
+    color: white;
+}
+
+.secondary-btn {
+    border: 1px solid #2879e8;
+
+    background: white;
+    color: #2879e8;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.secondary-btn {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 15px;
+
+    border: 1px solid #2879e8;
+    background: white;
+    color: #2879e8;
+}
+
+
+/* =========================
+   SIMPLE ILLUSTRATION
+========================= */
+
+.welcome-illustration {
+    width: 390px;
+    height: 260px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.invoice-paper {
+    width: 150px;
+    height: 205px;
+
+    background: white;
+
+    border: 4px solid #2879e8;
+    border-radius: 10px;
+
+    padding: 22px;
+
+    transform: rotate(-7deg);
+
+    box-shadow: 0 5px 15px rgba(40, 121, 232, 0.12);
+}
+
+.invoice-paper h3 {
+    color: #2879e8;
+    margin-bottom: 15px;
+}
+
+.invoice-line {
+    height: 7px;
+    background: #d9e7f8;
+
+    margin: 10px 0;
+
+    border-radius: 5px;
+}
+
+.invoice-line.short {
+    width: 65%;
+}
+
+.rupee {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #2879e8;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 15px auto;
+
+    font-weight: bold;
+}
+
+.person {
+    position: absolute;
+
+    right: 25px;
+    bottom: 15px;
+}
+
+.head {
+    width: 55px;
+    height: 55px;
+
+    background: #f1b18e;
+
+    border-radius: 50%;
+
+    margin-left: 25px;
+}
+
+.body {
+    width: 105px;
+    height: 110px;
+
+    background: #2879e8;
+
+    border-radius: 50px 50px 0 0;
+}
+
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 28px;
+}
+
+.summary-card {
+    min-height: 135px;
+
+    border: 1px solid #dce8f8;
+
+    border-radius: 13px;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+
+    background: white;
+}
+
+.summary-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: #eaf3ff;
+
+    color: #2879e8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-right: 20px;
+}
+
+.summary-info {
+    flex: 1;
+}
+
+.summary-info p {
+    font-size: 14px;
+
+    color: #5d7598;
+
+    margin-bottom: 8px;
+}
+
+.summary-info h2 {
+    color: #173b70;
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+.summary-info span {
+    font-size: 12px;
+
+    color: #7086a3;
+}
+
+.arrow {
+    font-size: 23px;
+
+    color: #2879e8;
+}
+
+
+/* =========================
+   RECENT INVOICES
+========================= */
+
+.recent-card {
+    margin-top: 25px;
+
+    min-height: 280px;
+
+    border: 1px solid #dce8f8;
+
+    border-radius: 13px;
+
+    background: white;
+
+    padding: 25px;
+}
+
+.recent-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.recent-title {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+.recent-title h2 {
+    font-size: 18px;
+
+    color: #173b70;
+}
+
+.document-icon {
+    color: #2879e8;
+
+    font-size: 22px;
+}
+
+.recent-header a {
+    color: #2879e8;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.empty-state {
+    text-align: center;
+
+    margin-top: 55px;
+}
+
+.empty-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: auto;
+
+    border: 2px solid #2879e8;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #2879e8;
+
+    font-size: 25px;
+
+    margin-bottom: 18px;
+}
+
+.empty-state h3 {
+    color: #4f6c91;
+
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #8195ad;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 35px 0 10px;
+
+    color: #6d84a3;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .main-content {
+        padding: 30px;
+    }
+
+    .welcome-card {
+        padding: 35px;
+    }
+
+    .welcome-illustration {
+        width: 300px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .sidebar {
+        width: 80px;
+    }
+
+    .side-item span:last-child {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .welcome-card {
+        flex-direction: column;
+
+        text-align: center;
+
+        gap: 30px;
+    }
+
+    .welcome-text h1 {
+        font-size: 32px;
+    }
+
+    .welcome-buttons {
+        justify-content: center;
+    }
+
+    .welcome-illustration {
+        transform: scale(0.8);
+    }
+
+}
+/* =========================
+   INVOICE LIST PAGE
+========================= */
+
+.page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.page-container h1 {
+    color: #173b70;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #dce8f8;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(30, 80, 140, 0.06);
+}
+
+.table th {
+    background: #2879e8;
+    color: white;
+    text-align: left;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5edf7;
+    color: #4f6c91;
+    font-size: 14px;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover {
+    background: #f8fbff;
+}
+
+.table td a {
+    color: #2879e8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+/* STATUS BADGES */
+
+.badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge.PAID {
+    background: #dff5e5;
+    color: #23823b;
+}
+
+.badge.UNPAID {
+    background: #fff2cc;
+    color: #9a7600;
+}
+
+
+/* UNPAID INVOICES */
+
+.page-container h2 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #173b70;
+}
+
+.unpaid-item {
+    padding: 15px 20px;
+    border: 1px solid #dce8f8;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: white;
+    color: #4f6c91;
+}
+/* =========================
+   CUSTOMERS PAGE
+========================= */
+
+/* =========================
+   CUSTOMERS PAGE
+========================= */
+
+/* CUSTOMER PAGE */
+
+.customers-page {
+    width: 100%;
+    padding: 20px;
+}
+
+.customers-page h1 {
+    color: #173b70;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.customers-page .customer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.customers-page .customer-card {
+    background: #ffffff;
+    border: 1px solid #dce8f8;
+    border-radius: 12px;
+    padding: 25px;
+    min-height: 170px;
+    box-shadow: 0 3px 12px rgba(30, 80, 140, 0.08);
+}
+
+.customers-page .customer-card h3 {
+    color: #173b70;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.customers-page .customer-card p {
+    color: #5d7598;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.customers-page .customer-card h2 {
+    color: #2879e8;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.customers-page .customer-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 15px;
+    background: #fff4cc;
+    color: #8a7000;
+    font-size: 12px;
+    font-weight: bold;
+}
+.nav-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.login-container {
+    width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background: white;
+    border: 1px solid #dce8f8;
+    border-radius: 10px;
+}
+
+.login-container h1 {
+    color: #173b70;
+    margin-bottom: 25px;
+}
+
+.login-container button {
+    background: #2879e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}

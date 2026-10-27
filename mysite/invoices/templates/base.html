@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing System</title>
+    {% load static %}
+   <link rel="stylesheet" href="{% static 'style.css' %}?v=2">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="brand">
+            Billing System
+        </div>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'invoice_list' %}">Invoices</a>
+            <a href="{% url 'cust_name' %}">Customers</a>
+            
+            <a href="{% url 'signup' %}">Signup</a>
+
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="nav-button">Logout</button>
+            </form>
+            {% else %}
+                 <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+
+        </div>
+    </nav>
+
+    <div class="main-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>

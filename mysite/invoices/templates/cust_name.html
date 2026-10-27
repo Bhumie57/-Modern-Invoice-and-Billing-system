@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="customers-page">
+
+    <h1>Customers</h1>
+
+    <div class="customer-grid">
+
+        {% for invoice in all_invoices %}
+
+        <div class="customer-card">
+
+            <h3>{{ invoice.customer }}</h3>
+
+            <p>Invoice #{{ invoice.number }}</p>
+
+            <h2>₹{{ invoice.amount }}</h2>
+
+            <span class="customer-badge">
+                Regular invoice
+            </span>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
