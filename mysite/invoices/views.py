@@ -2,6 +2,9 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 from .forms import InvoiceForm
 from .models import Invoice
@@ -37,11 +40,14 @@ def mark_as_paid(request):
 
     return render(request,'cust_name.html',data)
 
+@login_required
 def add_invoice(request):
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
         if form.is_valid():
-            form.save()
+            invoice = form.save(commit=False)
+            invoice.owner = request.user
+            invoice.save()
             messages.success(request, 'Invoice created successfully.')
             return redirect('invoice_list')
         messages.error(request, 'Please correct the errors below.')
@@ -59,12 +65,12 @@ def add_invoice(request):
 
 
 
-class HomePageView(TemplateView):
+class HomePageView(LoginRequiredMixin, TemplateView):
     template_name = "home.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        invoices = Invoice.objects.all()
+        invoices = Invoice.objects.filter(owner=self.request.user)
         total_amount = invoices.aggregate(total=Sum('amount'))['total']
         context['total_invoices'] = invoices.count()
         context['total_customers'] = invoices.values('customer_name').distinct().count()
@@ -72,19 +78,20 @@ class HomePageView(TemplateView):
         context['recent_invoices'] = invoices.order_by('-date_created', '-id')[:5]
         return context
 
-class InvoiceListView(TemplateView):
+class InvoiceListView(LoginRequiredMixin, TemplateView):
     template_name="invoice_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        invoices = Invoice.objects.all().order_by('-date_created', '-id')
+        invoices = Invoice.objects.filter(owner=self.request.user).order_by('-date_created', '-id')
         context['all_invoices'] = invoices
         context['unpaid_invoices'] = invoices.filter(is_paid=False)
         return context
 
 
+@login_required
 def show_invoices(request):
     data = {
-        'all_invoices': Invoice.objects.all().order_by('customer_name', '-id')
+        'all_invoices': Invoice.objects.filter(owner=request.user).order_by('customer_name', '-id')
     }
     return render(request, "cust_name.html", data)
 

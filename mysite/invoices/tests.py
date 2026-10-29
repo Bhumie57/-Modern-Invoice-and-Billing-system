@@ -4,9 +4,18 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .models import Invoice
+from django.contrib.auth import get_user_model
 
 
 class AddInvoiceTests(TestCase):
+    def setUp(self):
+        self.User = get_user_model()
+        self.user = self.User.objects.create_user(
+            username='testuser',
+            password='testpassword123'
+        )
+        self.client.force_login(self.user)
+
     def test_create_invoice_success(self):
         response = self.client.post(
             reverse('invoice_add'),
@@ -52,7 +61,15 @@ class AddInvoiceTests(TestCase):
 
 class InvoiceListAndDashboardTests(TestCase):
     def setUp(self):
+        self.User = get_user_model()
+        self.user = self.User.objects.create_user(
+            username='testuser',
+            password='testpassword123'
+        )
+        self.client.force_login(self.user)
+
         Invoice.objects.create(
+            owner=self.user,
             customer_name='Alice',
             invoice_number='INV-001',
             amount=Decimal('100.0000'),
@@ -60,6 +77,7 @@ class InvoiceListAndDashboardTests(TestCase):
             email_id='alice@example.com',
         )
         Invoice.objects.create(
+            owner=self.user,
             customer_name='Alice',
             invoice_number='INV-002',
             amount=Decimal('50.0000'),
@@ -67,12 +85,16 @@ class InvoiceListAndDashboardTests(TestCase):
             email_id='alice@example.com',
         )
         Invoice.objects.create(
+            owner=self.user,
             customer_name='Bob',
             invoice_number='INV-003',
             amount=Decimal('25.0000'),
             is_paid=False,
             email_id='bob@example.com',
         )
+        
+
+
 
     def test_invoice_list_shows_model_fields(self):
         response = self.client.get(reverse('invoice_list'))
@@ -107,3 +129,47 @@ class InvoiceListAndDashboardTests(TestCase):
         self.assertNotContains(response, 'Shana')
         self.assertNotContains(response, 'Aishwarya')
         self.assertNotContains(response, 'Nandni')
+
+
+    def test_users_only_see_their_own_invoices(self):
+        User = get_user_model()
+        another_user = User.objects.create_user(
+            username='anotheruser',
+            password='anotherpassword123'
+        )
+
+        Invoice.objects.create(
+            owner=another_user,
+            customer_name='Private Customer',
+            invoice_number='INV-PRIVATE',
+            amount=Decimal('999.0000'),
+            is_paid=False,
+            email_id='private@example.com',
+        )
+
+        response = self.client.get(reverse('invoice_list'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'INV-001')
+        self.assertNotContains(response, 'INV-PRIVATE')
+        self.assertNotContains(response, 'Private Customer')
+
+    
+
+class AuthenticationTests(TestCase):
+    def test_anonymous_users_are_redirected(self):
+        protected_urls = [
+            reverse('home'),
+            reverse('invoice_list'),
+            reverse('invoice_add'),
+            reverse('cust_name'),
+        ]
+
+        for url in protected_urls:
+            with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertRedirects(
+                    response,
+                    f"{reverse('login')}?next={url}",
+                    fetch_redirect_response=False,
+                )
